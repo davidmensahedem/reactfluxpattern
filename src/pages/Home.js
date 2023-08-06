@@ -7,6 +7,8 @@ import AppPublishForm from "../components/AppPublishForm";
 import AppWorkList from "../components/AppWorkList";
 import AppWorkPopularList from "../components/AppWorkPopularList";
 import AppHeader from "../components/AppHeader";
+import WorkActions from "../utilities/WorkActions";
+
 
 class Home extends Component {
     state = {
@@ -43,6 +45,12 @@ class Home extends Component {
             approved: "Approved",
             notApproved: "Not Approved"
         }
+
+
+    }
+
+    handleClick = () =>{
+       
     }
 
     render() {
@@ -55,7 +63,7 @@ class Home extends Component {
                         <Col md={5} className="p-3">
                             <Stack gap={2} className="p-2">
                                 <p className="text-muted text-center"><b>Publish your work</b></p>
-                                <AppPublishForm />
+                                <AppPublishForm handleClick={this.handleClick} />
                             </Stack>
                         </Col>
                         <Col>
