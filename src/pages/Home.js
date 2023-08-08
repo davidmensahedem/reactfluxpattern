@@ -110,7 +110,7 @@ class Home extends Component {
                         </Col>
 
                     </Row>
-                    <Row id="">
+                    {/* <Row id="">
                         <Col className="">
                             <Container className="p-3">
                                 <Tabs
@@ -133,7 +133,7 @@ class Home extends Component {
                         </Col>
                         
 
-                    </Row>
+                    </Row> */}
                 </Container>
             </>
         );
