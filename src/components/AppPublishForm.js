@@ -14,9 +14,9 @@ function AppPublishForm(props) {
                 <Form.Label className='text-primary'>Category</Form.Label>
                 <Form.Select id="workCategory" aria-label="Default select example">
                     <option value="">Choose a category</option>
-                    <option value="1">Research Paper</option>
-                    <option value="2">Article</option>
-                    <option value="3">Book</option>
+                    <option value="Research Paper">Research Paper</option>
+                    <option value="Article">Article</option>
+                    <option value="Book">Book</option>
                 </Form.Select>
             </Form.Group>
 

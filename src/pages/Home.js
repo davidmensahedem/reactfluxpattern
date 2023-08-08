@@ -1,57 +1,72 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Col, Container, Row, Stack } from "react-bootstrap";
-import AppCarousel from "../components/AppCarousel";
+import { Col, Container, Row, Stack, Tab, Tabs } from "react-bootstrap";
 import AppNavbar from "../components/AppNavbar";
 import AppPublishForm from "../components/AppPublishForm";
 import AppWorkList from "../components/AppWorkList";
 import AppWorkPopularList from "../components/AppWorkPopularList";
 import AppHeader from "../components/AppHeader";
 import WorkActions from "../utilities/WorkActions";
+import WorkStore from "../utilities/WorkStore";
 
 
 class Home extends Component {
-    state = {
-        works: [
-            {
-                id: 1,
-                title: "Generating electricity with sachet rubbers.",
-                category: "Article",
-                year: "2021",
-                status: "Approved",
-                popularityScore: 60,
-                author: "David Mensah"
-            },
-            {
-                id: 2,
-                title: "Creating robots to deliver medicine.",
-                category: "Article",
-                year: "2022",
-                status: "Approved",
-                popularityScore: 80,
-                author: "Jude Mensah"
-            },
-            {
-                id: 3,
-                title: "Structured Algorithms.",
-                category: "Book",
-                year: "2023",
-                status: "Not Approved",
-                popularityScore: 70,
-                author: "Peter Mensah"
-            },
-        ],
-        categories: {
-            approved: "Approved",
-            notApproved: "Not Approved"
+    constructor(props) {
+        super(props);
+        this.state = {
+            works: [],
+            categories: {
+                approved: "Approved",
+                notApproved: "Not Approved"
+            }
         }
 
-
+        this.handleClick = this.handleClick.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onRemove = this.onRemove.bind(this);
+        this.listWorks = this.listWorks.bind(this);
     }
 
-    handleClick = () =>{
-       
+    componentDidMount() {
+        this.listWorks();
+        WorkStore.addChangeListener('STORE_SUBMIT_WORK', this.listWorks);
     }
+
+    handleClick = (evt) => {
+        evt.preventDefault();
+        console.log("creating the work");
+        let newWork = {
+            id: this.state.works.length + 1,
+            author: "David Mensah",
+            popularityScore: Math.ceil(Math.random() * 1000)
+        };
+
+        newWork.title = document.getElementById("workTitle").value;
+        newWork.category = document.getElementById("workCategory").value;
+        newWork.year = document.getElementById("workYear").value;
+
+        console.log("dispatching the submit action type with data", newWork);
+        WorkActions.submitWork(newWork);
+
+        document.getElementById("workTitle").value = '';
+        document.getElementById("workCategory").value = '';
+        document.getElementById("workYear").value = '';
+    }
+
+    onRemove() {
+        this.listWorks()
+    }
+
+    onSubmit() {
+        this.listWorks()
+    }
+
+    listWorks() {
+        this.setState({
+            works: WorkStore.getAll(),
+        })
+    }
+
 
     render() {
         return (
@@ -93,6 +108,30 @@ class Home extends Component {
                                 </div>
                             </Stack>
                         </Col>
+
+                    </Row>
+                    <Row id="">
+                        <Col className="">
+                            <Container className="p-3">
+                                <Tabs
+                                    defaultActiveKey="profile"
+                                    id="uncontrolled-tab-example"
+                                    className="mb-3"
+                                    fill
+                                >
+                                    <Tab eventKey="home" title="Home">
+                                        
+                                    </Tab>
+                                    <Tab eventKey="profile" title="Profile">
+                                        Tab content for Profile
+                                    </Tab>
+                                    <Tab eventKey="contact" title="Contact">
+                                        Tab content for Contact
+                                    </Tab>
+                                </Tabs>
+                            </Container>
+                        </Col>
+                        
 
                     </Row>
                 </Container>
