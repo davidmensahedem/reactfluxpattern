@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Col, Container, Row, Stack, Tab, Tabs } from "react-bootstrap";
+import { Col, Container, Row, Stack, Tab, Tabs, Table, Badge } from "react-bootstrap";
 import AppNavbar from "../components/AppNavbar";
 import AppPublishForm from "../components/AppPublishForm";
 import AppWorkList from "../components/AppWorkList";
@@ -28,8 +28,8 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        this.listWorks();
         WorkStore.addChangeListener('STORE_SUBMIT_WORK', this.listWorks);
+        WorkStore.addChangeListener('STORE_APPROVE_WORK', this.listWorks);
     }
 
     handleClick = (evt) => {
@@ -74,7 +74,52 @@ class Home extends Component {
                 <AppNavbar />
                 <Container fluid>
                     <AppHeader />
-                    <Row id="works">
+                    <Row id="" className="">
+                        <Col className="">
+                            <Container className="p-3">
+                                <Tabs
+                                    defaultActiveKey="published"
+                                    id="uncontrolled-tab-example"
+                                    className="mb-3"
+                                    fill
+                                >
+                                    <Tab eventKey="published" title="Published">
+                                        <Table responsive>
+                                            <thead>
+                                                <tr>
+                                                    <th>Author</th>
+                                                    <th>Title</th>
+                                                    <th>Category</th>
+                                                    <th>Year</th>
+                                                    <th>Status</th>
+                                                    <th>Stats</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {WorkStore.getApproved().map((work, index) => (
+                                                    <tr key={work.index}>
+                                                        <td >{work.author}</td>
+                                                        <td>{work.title.length < 15 ? work.title : work.title.substring(0, 14)}</td>
+                                                        <td>{work.category}</td>
+                                                        <td>{work.year}</td>
+                                                        <td>{work.status}</td>
+                                                        <td><Badge bg="danger">{work.popularityScore}</Badge></td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </Table>
+                                    </Tab>
+                                    <Tab eventKey="notapproved" title="Pending">
+                                        Not Approved
+                                    </Tab>
+                                    <Tab eventKey="contact" title="Contact">
+                                        Tab content for Contact
+                                    </Tab>
+                                </Tabs>
+                            </Container>
+                        </Col>
+                    </Row>
+                    {/* <Row id="works">
                         <Col md={5} className="p-3">
                             <Stack gap={2} className="p-2">
                                 <p className="text-muted text-center"><b>Publish your work</b></p>
@@ -90,50 +135,9 @@ class Home extends Component {
                             </Stack>
                         </Col>
 
-                    </Row>
-                    <Row className="bg-light">
-                        <Col>
-                            <Stack gap={3} className="text-center p-5">
-                                <h3 className="p-2 p-3 text-muted">Published works</h3>
-                                <div>
-                                    <AppWorkList Works={this.state.works} WorkType={this.state.categories.approved} />
-                                </div>
-                            </Stack>
-                        </Col>
-                        <Col>
-                            <Stack gap={3} className="text-center p-5">
-                                <h3 className="p-2 p-3 text-muted">Pending works</h3>
-                                <div>
-                                    <AppWorkList Works={this.state.works} WorkType={this.state.categories.notApproved} />
-                                </div>
-                            </Stack>
-                        </Col>
-
-                    </Row>
-                    {/* <Row id="">
-                        <Col className="">
-                            <Container className="p-3">
-                                <Tabs
-                                    defaultActiveKey="profile"
-                                    id="uncontrolled-tab-example"
-                                    className="mb-3"
-                                    fill
-                                >
-                                    <Tab eventKey="home" title="Home">
-                                        
-                                    </Tab>
-                                    <Tab eventKey="profile" title="Profile">
-                                        Tab content for Profile
-                                    </Tab>
-                                    <Tab eventKey="contact" title="Contact">
-                                        Tab content for Contact
-                                    </Tab>
-                                </Tabs>
-                            </Container>
-                        </Col>
-                        
-
                     </Row> */}
+
+
                 </Container>
             </>
         );
