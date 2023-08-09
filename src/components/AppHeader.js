@@ -8,11 +8,11 @@ const AppHeader = (props) => {
             <Row className="bg-light">
                 <Col>
                     <Stack gap={3} className="text-center p-5">
-                        <h1 className="p-2 p-3 text-primary">Novel Research Hub</h1>
-                        <h4 className="p-2">The authentic place to get published scientific articles, books, and research papers.</h4>
+                        <h1 className="p-2 p-3 text-success">Novel Research Hub</h1>
+                        <h4 className="p-2 text-muted">The authentic place to get published scientific articles, books, and research papers.</h4>
                         <div>
-                            <Button size="sm" variant="outline-primary">
-                                <a href="#works" className="text-decoration-none">View articles, books, and research papers</a>
+                            <Button size="sm" variant="outline-success">
+                                <a href="#works" className="text-decoration-none text-success">View articles, books, and research papers</a>
                             </Button>{' '}
                         </div>
                     </Stack>
