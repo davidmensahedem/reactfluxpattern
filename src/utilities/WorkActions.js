@@ -18,6 +18,21 @@ class WorkActions {
             value:id
         })
     }
+
+    approveWork(data){
+        WorkDispatcher.dispatch({
+            actionType:"APPROVE_WORK",
+            value:data
+        });
+    }
+
+    disapproveWork(data){
+        WorkDispatcher.dispatch({
+            actionType:"DISAPPROVE_WORK",
+            value:data
+        });
+    }
+
 }
 
 export default new WorkActions();
