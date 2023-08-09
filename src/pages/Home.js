@@ -1,6 +1,6 @@
 import React, { Component, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Col, Container, Row, Stack, Tab, Tabs, Table, Badge } from "react-bootstrap";
+import { Col, Container, Row, Stack, Tab, Tabs, Table, Badge, Collapse, Button } from "react-bootstrap";
 import AppNavbar from "../components/AppNavbar";
 import AppWorkSection from "../components/AppWorksSection";
 import AppHeader from "../components/AppHeader";
@@ -65,10 +65,10 @@ class Home extends Component {
 
     listWorks = () => {
         this.setState({
-            works: WorkStore.getAllWorks(),  
+            works: WorkStore.getAllWorks(),
             publishedWorks: this.state.works.filter(w => w.status.toLowerCase() == "approved"),
             notApprovedWorks: this.state.works.filter(w => w.status.toLowerCase() == "not approved"),
-            pendingWorks: this.state.works.filter(w => w.status.toLowerCase() == "pending"),          
+            pendingWorks: this.state.works.filter(w => w.status.toLowerCase() == "pending"),
         })
     }
 
@@ -85,12 +85,18 @@ class Home extends Component {
                 <AppNavbar />
                 <Container fluid>
                     <AppHeader />
-                    <AppWorkSection 
-                    PendingWorks={pendingWorks} 
-                    NotApprovedWorks={notApprovedWorks} 
-                    PublishedWorks={publishedWorks}
-                    handleApproveWork={this.handleApproveWork}
-                    handleDisapproveWork={this.handleDisapproveWork}/>
+                    <Row className="p-3">
+                        <Col className="text-center pt-3">
+                            <p className="text-muted"><b>View the works of great professionals.</b></p>
+                            <Button variant="success">Publish work</Button>
+                        </Col>
+                    </Row>
+                    <AppWorkSection
+                        PendingWorks={pendingWorks}
+                        NotApprovedWorks={notApprovedWorks}
+                        PublishedWorks={publishedWorks}
+                        handleApproveWork={this.handleApproveWork}
+                        handleDisapproveWork={this.handleDisapproveWork} />
                     {/* <Row id="works">
                         <Col md={5} className="p-3">
                             <Stack gap={2} className="p-2">
