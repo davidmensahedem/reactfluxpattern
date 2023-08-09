@@ -12,7 +12,7 @@ const AppHeader = (props) => {
                         <h4 className="p-2 text-muted">The authentic place to get published scientific articles, books, and research papers.</h4>
                         <div>
                             <Button size="sm" variant="outline-success">
-                                <a href="#works" className="text-decoration-none text-success">View articles, books, and research papers</a>
+                                <a href="#works" className="text-decoration-none text-muted p-3">View articles, books, and research papers</a>
                             </Button>{' '}
                         </div>
                     </Stack>
