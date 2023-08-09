@@ -16,13 +16,13 @@ const AppWorkSection = (props) => {
                         className="mb-3"
                         fill
                     >
-                        <Tab eventKey="published" title="Published">
+                        <Tab eventKey="published" title={`Published (${props.PublishedWorks.length})`}>
                             <AppPublishedWorkTable PublishedWorks={props.PublishedWorks} handleDisapproveWork={props.handleDisapproveWork} />
                         </Tab>
-                        <Tab eventKey="notapproved" title="Not Approved">
+                        <Tab eventKey="notapproved" title={`Not Approved (${props.NotApprovedWorks.length})`}>
                             <AppNotApprovedWorkTable NotApprovedWorks={props.NotApprovedWorks} handleApproveWork={props.handleApproveWork} />
                         </Tab>
-                        <Tab eventKey="pending" title="Pending">
+                        <Tab eventKey="pending" title={`Published (${props.PendingWorks.length})`}>
                             <AppPendingWorkTable PendingWorks={props.PendingWorks} handleApproveWork={props.handleApproveWork} />
                         </Tab>
                     </Tabs>
