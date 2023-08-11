@@ -6,6 +6,7 @@ import AppWorkSection from "../components/AppWorksSection";
 import AppHeader from "../components/AppHeader";
 import WorkActions from "../utilities/WorkActions";
 import WorkStore from "../utilities/WorkStore";
+import AppCreateWorkModal from "../components/AppCreateWorkModal";
 
 class Home extends Component {
     constructor(props) {
@@ -18,7 +19,8 @@ class Home extends Component {
             categories: {
                 approved: "Approved",
                 notApproved: "Not Approved"
-            }
+            },
+            createWorkModalState: false
         }
     }
 
@@ -32,11 +34,14 @@ class Home extends Component {
 
     handleSubmitWork = (evt) => {
         evt.preventDefault();
+        console.log("submitting work");
         let newWork = {
             id: this.state.works.length + 1,
-            author: "David Mensah",
-            popularityScore: Math.ceil(Math.random() * 1000)
+            popularityScore: Math.ceil(Math.random() * 1000),
+            status:"Pending"
         };
+
+        newWork.author = document.getElementById("workAuthor").value;
 
         newWork.title = document.getElementById("workTitle").value;
 
@@ -45,6 +50,8 @@ class Home extends Component {
         newWork.year = document.getElementById("workYear").value;
 
         WorkActions.submitWork(newWork);
+
+        this.hideCreateWorkModal();
 
         document.getElementById("workTitle").value = '';
         document.getElementById("workCategory").value = '';
@@ -72,6 +79,18 @@ class Home extends Component {
         })
     }
 
+    showCreateWorkModal = () => {
+        this.setState({
+            createWorkModalState: true
+        });
+    }
+
+    hideCreateWorkModal = () => {
+        this.setState({
+            createWorkModalState: false
+        });
+    }
+
     render() {
 
         let publishedWorks = this.state.publishedWorks;
@@ -88,7 +107,7 @@ class Home extends Component {
                     <Row className="p-3">
                         <Col className="text-center pt-3">
                             <p className="text-muted"><b>View the works of great professionals.</b></p>
-                            <Button variant="success">Publish work</Button>
+                            <Button variant="success" onClick={this.showCreateWorkModal}>Publish work</Button>
                         </Col>
                     </Row>
                     <AppWorkSection
@@ -97,6 +116,11 @@ class Home extends Component {
                         PublishedWorks={publishedWorks}
                         handleApproveWork={this.handleApproveWork}
                         handleDisapproveWork={this.handleDisapproveWork} />
+                    <AppCreateWorkModal id="worksection"
+                        modalState={this.state.createWorkModalState}
+                        hideCreateWorkModal={this.hideCreateWorkModal}
+                        handleSubmitWork={this.handleSubmitWork}
+                    />
                     {/* <Row id="works">
                         <Col md={5} className="p-3">
                             <Stack gap={2} className="p-2">

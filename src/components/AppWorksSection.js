@@ -22,7 +22,7 @@ const AppWorkSection = (props) => {
                         <Tab eventKey="notapproved" title={`Not Approved (${props.NotApprovedWorks.length})`}>
                             <AppNotApprovedWorkTable NotApprovedWorks={props.NotApprovedWorks} handleApproveWork={props.handleApproveWork} />
                         </Tab>
-                        <Tab eventKey="pending" title={`Published (${props.PendingWorks.length})`}>
+                        <Tab eventKey="pending" title={`Pending (${props.PendingWorks.length})`}>
                             <AppPendingWorkTable PendingWorks={props.PendingWorks} handleApproveWork={props.handleApproveWork} />
                         </Tab>
                     </Tabs>

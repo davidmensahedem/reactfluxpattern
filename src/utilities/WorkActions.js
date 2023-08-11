@@ -6,10 +6,6 @@ class WorkActions {
             actionType: 'SUBMIT_WORK',
             value: data
         });
-        WorkDispatcher.dispatch({
-            actionType: 'APPROVE_WORK',
-            value: data
-        });
     }
 
     removeWork(id) {
