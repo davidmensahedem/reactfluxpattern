@@ -122,12 +122,7 @@ class Home extends Component {
                         handleSubmitWork={this.handleSubmitWork}
                     />
                     {/* <Row id="works">
-                        <Col md={5} className="p-3">
-                            <Stack gap={2} className="p-2">
-                                <p className="text-muted text-center"><b>Publish your work</b></p>
-                                <AppPublishForm handleClick={this.handleClick} />
-                            </Stack>
-                        </Col>
+                        
                         <Col>
                             <Stack gap={3} className="text-center p-5">
                                 <p className="text-muted"><b>Popular works</b></p>
