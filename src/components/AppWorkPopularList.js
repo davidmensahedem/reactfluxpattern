@@ -17,7 +17,7 @@ function AppWorkPopularList(props) {
             <p><small className='text-primary'>{w.title}: <Badge bg="danger">{w.popularityScore}</Badge></small></p>
             <p><small><span className='text-primary'>By: </span>{w.author}</small></p>
         </ListGroup.Item>)
-    })) : <p>No item</p>
+    })) : <p>No work item</p>
     return (
         <ListGroup>
             {works}
